@@ -19,6 +19,9 @@ RUN npm run build
 # Nginx tabanlı production image
 FROM nginx:alpine
 
+# curl kurulumu (health check için)
+RUN apk add --no-cache curl
+
 # Build dosyalarını nginx'e kopyala
 COPY --from=build /app/build /usr/share/nginx/html
 
