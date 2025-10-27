@@ -7,8 +7,8 @@ WORKDIR /app
 # Package dosyalarını kopyala
 COPY package*.json ./
 
-# Dependencies yükle (production + dev dependencies için)
-RUN npm ci
+# Dependencies yükle
+RUN npm install
 
 # Kaynak kodları kopyala
 COPY . .
