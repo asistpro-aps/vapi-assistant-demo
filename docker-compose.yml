@@ -10,21 +10,21 @@ services:
       - "3000:80"
     environment:
       # Vapi Configuration
-      - REACT_APP_VAPI_PUBLIC_KEY=54d8b8e4-20db-4ae0-a3fd-2e007a1ff483
+      - REACT_APP_VAPI_PUBLIC_KEY=${REACT_APP_VAPI_PUBLIC_KEY}
       
       # Asistan 1 - Villa Polikne Hotel
-      - REACT_APP_ASSISTANT1_ID=4c765584-0bd2-4bf0-a59c-684d96166665
-      - REACT_APP_ASSISTANT1_NAME=Villa Polikne Otel Asistanı
-      - REACT_APP_ASSISTANT1_DESC=Otel rezervasyonları ve bilgileri için
-      - REACT_APP_ASSISTANT1_GRADIENT=linear-gradient(135deg, #667eea 0%, #764ba2 100%)
+      - REACT_APP_ASSISTANT1_ID=${REACT_APP_ASSISTANT1_ID}
+      - REACT_APP_ASSISTANT1_NAME=${REACT_APP_ASSISTANT1_NAME}
+      - REACT_APP_ASSISTANT1_DESC=${REACT_APP_ASSISTANT1_DESC}
+      - REACT_APP_ASSISTANT1_GRADIENT=${REACT_APP_ASSISTANT1_GRADIENT}
       
       # Asistan 2 - Hereke Balık Restaurant  
-      - REACT_APP_ASSISTANT2_ID=cbb10968-bd56-4996-83b1-61c697eed549
-      - REACT_APP_ASSISTANT2_NAME=Hereke Balık Asistanı
-      - REACT_APP_ASSISTANT2_DESC=Restoran rezervasyonları ve menü bilgileri için
-      - REACT_APP_ASSISTANT2_GRADIENT=linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
+      - REACT_APP_ASSISTANT2_ID=${REACT_APP_ASSISTANT2_ID}
+      - REACT_APP_ASSISTANT2_NAME=${REACT_APP_ASSISTANT2_NAME}
+      - REACT_APP_ASSISTANT2_DESC=${REACT_APP_ASSISTANT2_DESC}
+      - REACT_APP_ASSISTANT2_GRADIENT=${REACT_APP_ASSISTANT2_GRADIENT}
       
       # Genel Ayarlar
-      - REACT_APP_SITE_TITLE=AsistPro.ai
-      - REACT_APP_SITE_SUBTITLE=Hangi asistanla konuşmak istersiniz?
+      - REACT_APP_SITE_TITLE=${REACT_APP_SITE_TITLE}
+      - REACT_APP_SITE_SUBTITLE=${REACT_APP_SITE_SUBTITLE}
     restart: unless-stopped

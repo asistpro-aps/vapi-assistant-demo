@@ -1,86 +1,57 @@
 # 🎯 Vapi AI Asistan Demo
 
-Villa Polikne Hotel ve Hereke Balık Restaurant için geliştirilmiş modern AI asistan demo sayfası.
+Modern AI asistan demo sayfası - Docker ile kolay deployment.
 
 ## ✨ Özellikler
 
-- 🤖 **İki Farklı AI Asistan**: Otel ve restoran için özelleştirilmiş
+- 🤖 **İki Farklı AI Asistan**: Özelleştirilebilir asistanlar
 - 🎵 **Real-time Audio Spektrum**: Konuştukça hareket eden görselleştirme
 - 📱 **Responsive Tasarım**: Mobil ve desktop uyumlu
 - 🐳 **Docker Desteği**: Kolay deployment
-- ⚙️ **Environment Variables**: Kolay konfigürasyon
+- ⚙️ **Environment Variables**: Güvenli konfigürasyon
 
-## 🚀 Hızlı Başlangıç
+## 🚀 Coolify ile Deployment
 
-### Docker ile (Önerilen)
+### 1. Coolify'da Repository Ekle
+- **New Resource** > **Git Repository**
+- **URL**: `https://github.com/asistpro-aps/vapi-assistant-demo`
 
-```bash
-# Repository'yi klonla
-git clone <repo-url>
-cd vapi-assistant-demo
-
-# Environment variables düzenle
-cp .env.example .env
-nano .env
-
-# Docker ile çalıştır
-docker-compose up -d
-
-# Erişim: http://localhost:3000
-```
-
-### Yerel Geliştirme
-
-```bash
-# Dependencies yükle
-npm install
-
-# Geliştirme sunucusunu başlat
-npm start
-```
-
-## 🔧 Konfigürasyon
-
-`.env` dosyasını düzenleyerek asistan bilgilerini güncelleyebilirsiniz:
+### 2. Environment Variables Ekle
+Coolify'da **Environment Variables** bölümüne şunları ekleyin:
 
 ```env
+# Vapi Configuration (GEREKLİ!)
+REACT_APP_VAPI_PUBLIC_KEY=your-vapi-public-key-here
+
 # Asistan 1
-REACT_APP_ASSISTANT1_ID=your-assistant-id
-REACT_APP_ASSISTANT1_NAME=Asistan Adı
-REACT_APP_ASSISTANT1_DESC=Asistan açıklaması
-REACT_APP_ASSISTANT1_GRADIENT=linear-gradient(135deg, #color1, #color2)
+REACT_APP_ASSISTANT1_ID=your-first-assistant-id
+REACT_APP_ASSISTANT1_NAME=İlk Asistan Adı
+REACT_APP_ASSISTANT1_DESC=İlk asistan açıklaması
+REACT_APP_ASSISTANT1_GRADIENT=linear-gradient(135deg, #667eea 0%, #764ba2 100%)
 
 # Asistan 2
-REACT_APP_ASSISTANT2_ID=your-assistant-id
-REACT_APP_ASSISTANT2_NAME=Asistan Adı
-REACT_APP_ASSISTANT2_DESC=Asistan açıklaması
-REACT_APP_ASSISTANT2_GRADIENT=linear-gradient(135deg, #color1, #color2)
+REACT_APP_ASSISTANT2_ID=your-second-assistant-id
+REACT_APP_ASSISTANT2_NAME=İkinci Asistan Adı
+REACT_APP_ASSISTANT2_DESC=İkinci asistan açıklaması
+REACT_APP_ASSISTANT2_GRADIENT=linear-gradient(135deg, #f093fb 0%, #f5576c 100%)
 
 # Site Ayarları
-REACT_APP_SITE_TITLE=Site Başlığı
-REACT_APP_SITE_SUBTITLE=Site Alt Başlığı
+REACT_APP_SITE_TITLE=Your Site Title
+REACT_APP_SITE_SUBTITLE=Your Subtitle
 ```
 
-## 📖 Deployment Rehberi
+### 3. Deploy
+**Deploy** butonuna tıklayın!
 
-Detaylı deployment talimatları için [DOCKER-DEPLOYMENT.md](./DOCKER-DEPLOYMENT.md) dosyasını inceleyin.
+## 🎨 Gradient Renk Örnekleri
 
-## 🛠️ Teknolojiler
+```css
+linear-gradient(135deg, #667eea 0%, #764ba2 100%) /* Mavi-Mor */
+linear-gradient(135deg, #f093fb 0%, #f5576c 100%) /* Pembe-Kırmızı */
+linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) /* Yeşil-Mavi */
+linear-gradient(135deg, #fa709a 0%, #fee140 100%) /* Turuncu-Pembe */
+```
 
-- **React 18.2.0**: Frontend framework
-- **Vapi Web SDK**: AI asistan entegrasyonu
-- **Docker**: Containerization
-- **Nginx**: Production web server
+## 🔐 Güvenlik
 
-## 📱 Demo
-
-- **Villa Polikne Hotel Asistanı**: Otel rezervasyonları ve bilgileri
-- **Hereke Balık Restaurant Asistanı**: Restoran rezervasyonları ve menü bilgileri
-
-## 🤝 Katkıda Bulunma
-
-1. Fork'layın
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Commit'leyin (`git commit -m 'Add amazing feature'`)
-4. Push'layın (`git push origin feature/amazing-feature`)
-5. Pull Request açın
+⚠️ **API anahtarları GitHub'da saklanmaz** - Sadece Coolify Environment Variables'da!
