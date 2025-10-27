@@ -76,7 +76,7 @@ vapi-assistant-demo/
 └── README.md
 ```
 
-## 🆘 SORUN YAŞARSENIZ:
+## 🆘 SORUN YAŞARSANIZ:
 - SETUP.md dosyasına bakın
 - README.md'de detaylı bilgi var
 - demo-preview.html ile tasarımı görebilirsiniz
