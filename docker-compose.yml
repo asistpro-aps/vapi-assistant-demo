@@ -9,6 +9,9 @@ services:
     ports:
       - "3000:80"
     environment:
+      # Vapi Configuration
+      - REACT_APP_VAPI_PUBLIC_KEY=54d8b8e4-20db-4ae0-a3fd-2e007a1ff483
+      
       # Asistan 1 - Villa Polikne Hotel
       - REACT_APP_ASSISTANT1_ID=4c765584-0bd2-4bf0-a59c-684d96166665
       - REACT_APP_ASSISTANT1_NAME=Villa Polikne Otel Asistanı

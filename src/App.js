@@ -9,8 +9,8 @@ const App = () => {
   const [callStatus, setCallStatus] = useState('Bağlantı için hazır...');
   const [showModal, setShowModal] = useState(false);
 
-  // Vapi instance'ını oluştur (buraya kendi public key'inizi yazın)
-  const VAPI_PUBLIC_KEY = '54d8b8e4-20db-4ae0-a3fd-2e007a1ff483';
+  // Vapi instance'ını oluştur (environment variable'dan public key al)
+  const VAPI_PUBLIC_KEY = process.env.REACT_APP_VAPI_PUBLIC_KEY || '54d8b8e4-20db-4ae0-a3fd-2e007a1ff483';
   
   // Environment variables'dan asistan bilgilerini al
   const ASSISTANTS = {
