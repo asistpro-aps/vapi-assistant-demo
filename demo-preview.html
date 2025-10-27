@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vapi AI Asistan Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .app {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .assistants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .assistant-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+
+        .assistant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .assistant-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .customer-service .assistant-icon { background-color: #3B82F6; }
+        .sales .assistant-icon { background-color: #10B981; }
+
+        .assistant-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .assistant-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .assistant-button {
+            background: white;
+            border: 2px solid #ddd;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .assistant-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .customer-service .assistant-button { border-color: #3B82F6; }
+        .sales .assistant-button { border-color: #10B981; }
+
+        .call-status {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            display: none;
+        }
+
+        .call-status.active { display: block; }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .pulse {
+            width: 12px;
+            height: 12px;
+            background: #10B981;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .footer {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer p { margin-bottom: 0.5rem; }
+
+        .footer code {
+            background: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            color: #e74c3c;
+            font-size: 0.85rem;
+        }
+
+        .setup-section {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .setup-section h3 {
+            color: #856404;
+            margin-bottom: 1rem;
+        }
+
+        .setup-steps {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .setup-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .setup-steps li {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <div class="container">
+            <header class="header">
+                <h1>🤖 AI Asistan Demo</h1>
+                <p>Hangi asistanla konuşmak istersiniz?</p>
+            </header>
+
+            <div class="setup-section">
+                <h3>⚙️ Kurulum Tamamlanması Gerekiyor</h3>
+                <div class="setup-steps">
+                    <p><strong>Demo sayfanız hazır!</strong> Vapi entegrasyonunu tamamlamak için:</p>
+                    <ol>
+                        <li><strong>Node.js kurulumunu tamamlayın:</strong> PATH sorunu nedeniyle React versiyonu çalışmıyor</li>
+                        <li><strong>Vapi hesabı oluşturun:</strong> <a href="https://dashboard.vapi.ai" target="_blank">dashboard.vapi.ai</a></li>
+                        <li><strong>Public Key ve Asistan ID'lerini alın</strong></li>
+                        <li><strong>src/App.js dosyasında konfigürasyon yapın</strong></li>
+                        <li><strong>npm start ile React uygulamasını başlatın</strong></li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="assistants-grid">
+                <div class="assistant-card customer-service">
+                    <div class="assistant-icon">🎧</div>
+                    <h3>Müşteri Hizmetleri</h3>
+                    <p>Müşteri sorularınızı yanıtlar ve destek sağlar</p>
+                    <button class="assistant-button" onclick="showDemo('customer-service')">
+                        Müşteri Hizmetleri ile Konuş
+                    </button>
+                </div>
+
+                <div class="assistant-card sales">
+                    <div class="assistant-icon">💼</div>
+                    <h3>Satış Danışmanı</h3>
+                    <p>Ürünler hakkında bilgi verir ve satış desteği sağlar</p>
+                    <button class="assistant-button" onclick="showDemo('sales')">
+                        Satış Danışmanı ile Konuş
+                    </button>
+                </div>
+            </div>
+
+            <div class="call-status" id="callStatus">
+                <div class="status-indicator">
+                    <div class="pulse"></div>
+                    <span class="status-text">Demo Modu - Gerçek bağlantı için React uygulamasını kullanın</span>
+                </div>
+            </div>
+
+            <footer class="footer">
+                <p>💡 <strong>Not:</strong> Bu statik demo sayfasıdır. Gerçek Vapi entegrasyonu için React uygulamasını çalıştırın.</p>
+                <p>🔧 <strong>React Sürümü:</strong> <code>npm start</code> komutu ile tam fonksiyonel versiyonu başlatın.</p>
+                <p>📁 <strong>Dosya Konumu:</strong> <code>d:\Work\vapi\vapi-assistant-demo\</code></p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function showDemo(assistantType) {
+            const callStatus = document.getElementById('callStatus');
+            callStatus.classList.add('active');
+            
+            const assistantNames = {
+                'customer-service': '🎧 Müşteri Hizmetleri',
+                'sales': '💼 Satış Danışmanı'
+            };
+            
+            const statusText = callStatus.querySelector('.status-text');
+            statusText.textContent = `Demo: ${assistantNames[assistantType]} seçildi - Gerçek bağlantı için React uygulamasını kullanın`;
+            
+            // 5 saniye sonra gizle
+            setTimeout(() => {
+                callStatus.classList.remove('active');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
